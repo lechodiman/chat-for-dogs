@@ -5,17 +5,17 @@ import firebase from "./firebase";
 
 const db = firebase.database();
 
+const chatRoom = db
+  .ref()
+  .child("chatrooms")
+  .child("global");
+
 const App = props => {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState({});
   const [joined, setJoined] = useState(false);
-
-  const chatRoom = db
-    .ref()
-    .child("chatrooms")
-    .child("global");
 
   useEffect(() => {
     const handleNewMessages = snap => {
@@ -30,7 +30,7 @@ const App = props => {
     return () => {
       chatRoom.off("value", handleNewMessages);
     };
-  }, []);
+  }, [chatRoom]);
 
   const handleNameChange = e => setNickname(e.target.value);
   const handleEmailChange = e => setEmail(e.target.value);
