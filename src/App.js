@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, Fragment } from "react";
 import "./App.css";
 import firebase from "./firebase";
-
+import Welcome from "./components/Welcome";
+import Messages from "./components/Messages/Messages";
+import MessageForm from "./components/Messages/MessageForm";
 const db = firebase.database();
-
-const chatRoom = db
-  .ref()
-  .child("chatrooms")
-  .child("global");
 
 const App = props => {
   const [nickname, setNickname] = useState("");
-  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState({});
   const [joined, setJoined] = useState(false);
+
+  const chatRoom = db
+    .ref()
+    .child("chatrooms")
+    .child("global");
 
   useEffect(() => {
     const handleNewMessages = snap => {
@@ -30,17 +30,15 @@ const App = props => {
     return () => {
       chatRoom.off("value", handleNewMessages);
     };
-  }, [chatRoom]);
+  }, []);
 
   const handleNameChange = e => setNickname(e.target.value);
-  const handleEmailChange = e => setEmail(e.target.value);
 
   const handleClick = e => {
     db.ref()
       .child("nicknames")
       .push({
-        nickname,
-        email
+        nickname
       });
     setJoined(true);
   };
@@ -52,7 +50,8 @@ const App = props => {
     if (e.key === "Enter") {
       chatRoom.push({
         sender: nickname,
-        message
+        message,
+        date: new Date()
       });
       setMessage("");
     }
@@ -61,59 +60,23 @@ const App = props => {
   return (
     <div className="App">
       {!joined ? (
-        <div className="joinForm">
-          <input
-            type="text"
-            placeholder="Nickname"
-            value={nickname}
-            onChange={handleNameChange}
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <br />
-          <button onClick={handleClick}>Join</button>
-        </div>
+        <Welcome
+          nickname={nickname}
+          onNicknameChange={handleNameChange}
+          onClick={handleClick}
+        ></Welcome>
       ) : (
-        <div className="chat">
-          <div className="messages">
-            {Object.keys(messages).map(key => {
-              if (messages[key]["sender"] === nickname) {
-                return (
-                  <div className="message" key={key}>
-                    <span id="me">{messages[key]["sender"]} :</span>
-                    <br />
-                    {messages[key]["message"]}
-                  </div>
-                );
-              }
-
-              return (
-                <div className="message" key={key}>
-                  <span id="sender">{messages[key]["sender"]} :</span>
-                  <br />
-                  {messages[key]["message"]}
-                </div>
-              );
-            })}
-          </div>
-          <input
-            type="text"
-            placeholder="msg"
-            onChange={handleMessageChange}
-            value={message}
-            onKeyDown={handleKeyDown}
-          />
-        </div>
+        <Fragment>
+          <Messages messages={messages}></Messages>
+          <MessageForm
+            message={message}
+            onMessageChange={handleMessageChange}
+            onMessageSubmit={handleKeyDown}
+          ></MessageForm>
+        </Fragment>
       )}
     </div>
   );
 };
-
-App.propTypes = {};
 
 export default App;
