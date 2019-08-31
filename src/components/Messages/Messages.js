@@ -5,9 +5,11 @@ const Messages = ({ messages }) => {
   return (
     <div className="chat">
       <div className="messages">
-        {Object.keys(messages).map(key => {
-          return <MessageItem message={messages[key]} key={key}></MessageItem>;
-        })}
+        {messages.map((message, index) => (
+          <li key={index}>
+            <MessageItem message={message}></MessageItem>
+          </li>
+        ))}
       </div>
     </div>
   );

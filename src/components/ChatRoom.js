@@ -1,14 +1,13 @@
 import React, { useState, useEffect, Fragment } from "react";
-import firebase from "../firebase";
+import db from "../firebase";
 import Welcome from "./Welcome";
 import Messages from "./Messages/Messages";
 import MessageForm from "./Messages/MessageForm";
-const db = firebase.database();
 
-const App = props => {
+const ChatRoom = props => {
   const [nickname, setNickname] = useState("");
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState({});
+  const [messages, setMessages] = useState([]);
   const [joined, setJoined] = useState(false);
 
   const chatRoom = db
@@ -20,7 +19,7 @@ const App = props => {
     const handleNewMessages = snap => {
       console.log(snap.val());
       if (snap.val()) {
-        setMessages(snap.val());
+        setMessages(Object.values(snap.val()));
       }
     };
 
@@ -46,11 +45,12 @@ const App = props => {
 
   // Not sure why this is here
   const handleKeyDown = e => {
+    const date = new Date();
     if (e.key === "Enter") {
       chatRoom.push({
         sender: nickname,
         message,
-        date: new Date()
+        date: date.toString()
       });
       setMessage("");
     }
@@ -78,4 +78,4 @@ const App = props => {
   );
 };
 
-export default App;
+export default ChatRoom;
