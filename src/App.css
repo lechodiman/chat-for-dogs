@@ -61,3 +61,28 @@
   font-weight: 300;
   align-self: flex-end;
 }
+
+.pagination {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.page-item {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.page-item:hover {
+}
+
+.page-link {
+  text-decoration: underline;
+}
+
+.page-link:hover {
+  color: blue;
+  cursor: pointer;
+}
