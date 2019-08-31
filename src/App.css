@@ -31,3 +31,33 @@
     transform: rotate(360deg);
   }
 }
+
+.messages {
+  width: 60%;
+  margin: 0.5rem auto;
+  max-width: 600px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #282c34;
+  border-radius: 3%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sender {
+  font-weight: bold;
+  justify-self: start;
+  align-self: flex-start;
+}
+
+.message-text {
+  margin: 0;
+}
+
+.message-date {
+  font-weight: 300;
+  align-self: flex-end;
+}

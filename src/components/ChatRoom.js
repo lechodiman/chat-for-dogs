@@ -17,7 +17,6 @@ const ChatRoom = props => {
 
   useEffect(() => {
     const handleNewMessages = snap => {
-      console.log(snap.val());
       if (snap.val()) {
         setMessages(Object.values(snap.val()));
       }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import MessageItem from "./MessageItem";
 
 const Messages = ({ messages }) => {
@@ -6,9 +6,9 @@ const Messages = ({ messages }) => {
     <div className="chat">
       <div className="messages">
         {messages.map((message, index) => (
-          <li key={index}>
+          <Fragment key={index}>
             <MessageItem message={message}></MessageItem>
-          </li>
+          </Fragment>
         ))}
       </div>
     </div>
