@@ -9,6 +9,7 @@ const ChatRoom = props => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [joined, setJoined] = useState(false);
+  const [avatar, setAvatar] = useState("");
 
   const chatRoom = db
     .ref()
@@ -30,6 +31,7 @@ const ChatRoom = props => {
   }, []);
 
   const handleNameChange = e => setNickname(e.target.value);
+  const handleAvatarChange = avatar => setAvatar(avatar);
 
   const handleClick = e => {
     db.ref()
@@ -48,6 +50,7 @@ const ChatRoom = props => {
     if (e.key === "Enter") {
       chatRoom.push({
         sender: nickname,
+        avatar,
         message,
         date: date.toString()
       });
@@ -61,6 +64,8 @@ const ChatRoom = props => {
         <Welcome
           nickname={nickname}
           onNicknameChange={handleNameChange}
+          avatar={avatar}
+          onAvatarChange={handleAvatarChange}
           onClick={handleClick}
         ></Welcome>
       ) : (
