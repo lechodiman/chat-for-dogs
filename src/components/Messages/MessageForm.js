@@ -1,9 +1,12 @@
 import React from "react";
 
-const MessageForm = ({ message, onMessageChange, onMessageSubmit }) => {
+const MessageForm = ({ avatar, message, onMessageChange, onMessageSubmit }) => {
   return (
-    <div>
+    <div className="form">
+      <img src={avatar} alt="dog" className="avatar" />
+
       <input
+        className="message-input"
         type="text"
         placeholder="msg"
         onChange={onMessageChange}

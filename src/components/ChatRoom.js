@@ -4,7 +4,7 @@ import Welcome from "./Welcome";
 import Messages from "./Messages/Messages";
 import MessageForm from "./Messages/MessageForm";
 
-const ChatRoom = props => {
+const ChatRoom = () => {
   const [nickname, setNickname] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -72,6 +72,7 @@ const ChatRoom = props => {
         <Fragment>
           <Messages messages={messages}></Messages>
           <MessageForm
+            avatar={avatar}
             message={message}
             onMessageChange={handleMessageChange}
             onMessageSubmit={handleKeyDown}
