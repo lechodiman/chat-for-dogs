@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import db from "../firebase";
+import { db } from "../firebase";
 import Welcome from "./Welcome";
 import Messages from "./Messages/Messages";
 import MessageForm from "./Messages/MessageForm";

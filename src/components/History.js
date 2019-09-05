@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import db from "../firebase";
+import { db } from "../firebase";
 import Pagination from "./Pagination";
 import Messages from "./Messages/Messages";
 const History = () => {
-  // TODO:
-  // - Load latest 100 messages
-  // - Display messages with MessageItem
-  // - Paginate those messages
   const [messages, setMessages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
