@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
@@ -7,17 +9,15 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   }
 
   return (
-    <nav>
-      <ul className="pagination">
-        {pageNumbers.map(number => (
-          <li key={number} className="page-item">
-            <button onClick={() => paginate(number)} className="page-link">
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <Grid container justify="center" className="max-w-700 m-0-auto">
+      {pageNumbers.map(number => (
+        <Grid item xs key={number}>
+          <Button variant="contained" onClick={() => paginate(number)}>
+            {number}
+          </Button>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

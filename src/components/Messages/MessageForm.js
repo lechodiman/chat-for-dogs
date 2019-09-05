@@ -1,19 +1,20 @@
 import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 
 const MessageForm = ({ avatar, message, onMessageChange, onMessageSubmit }) => {
   return (
-    <div className="form">
-      <img src={avatar} alt="dog" className="avatar" />
-
-      <input
-        className="message-input"
-        type="text"
-        placeholder="msg"
-        onChange={onMessageChange}
+    <Grid container justify="center" alignItems="center">
+      <Avatar alt="my-photo" src={avatar} />
+      <TextField
+        label="Message"
         value={message}
+        onChange={onMessageChange}
         onKeyDown={onMessageSubmit}
+        margin="normal"
       />
-    </div>
+    </Grid>
   );
 };
 

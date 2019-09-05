@@ -5,7 +5,7 @@ import Messages from "./Messages/Messages";
 const History = () => {
   const [messages, setMessages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(2);
+  const [postsPerPage] = useState(5);
 
   useEffect(() => {
     const chatRoom = db
@@ -16,7 +16,6 @@ const History = () => {
     const handleNewMessages = snap => {
       if (snap.val()) {
         setMessages(Object.values(snap.val()));
-        console.log(Object.values(snap.val()));
       }
     };
 
