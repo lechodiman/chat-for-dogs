@@ -3,6 +3,7 @@ import { db } from "../firebase";
 import Welcome from "./Welcome";
 import Messages from "./Messages/Messages";
 import MessageForm from "./Messages/MessageForm";
+import Container from "@material-ui/core/Container";
 
 const ChatRoom = () => {
   const [nickname, setNickname] = useState("");
@@ -29,6 +30,13 @@ const ChatRoom = () => {
   const handleNameChange = e => setNickname(e.target.value);
   const handleAvatarChange = avatar => setAvatar(avatar);
 
+  const saveMessage = messageDoc => {
+    return db
+      .ref("/chatrooms/global/")
+      .push(messageDoc)
+      .catch(e => console.log("Error saving message to DB: ", e));
+  };
+
   const handleClick = e => {
     db.ref()
       .child("nicknames")
@@ -40,22 +48,23 @@ const ChatRoom = () => {
 
   const handleMessageChange = e => setMessage(e.target.value);
 
-  // Not sure why this is here
   const handleKeyDown = e => {
     const date = new Date();
+    const messageDoc = {
+      sender: nickname,
+      avatar,
+      message,
+      date: date.toString()
+    };
+
     if (e.key === "Enter") {
-      db.ref("/chatrooms/global/").push({
-        sender: nickname,
-        avatar,
-        message,
-        date: date.toString()
-      });
+      saveMessage(messageDoc);
       setMessage("");
     }
   };
 
   return (
-    <div className="App">
+    <Container maxWidth="sm">
       {!joined ? (
         <Welcome
           nickname={nickname}
@@ -75,7 +84,7 @@ const ChatRoom = () => {
           ></MessageForm>
         </Fragment>
       )}
-    </div>
+    </Container>
   );
 };
 
