@@ -11,22 +11,18 @@ const ChatRoom = () => {
   const [joined, setJoined] = useState(false);
   const [avatar, setAvatar] = useState("");
 
-  const chatRoom = db
-    .ref()
-    .child("chatrooms")
-    .child("global");
-
   useEffect(() => {
-    const handleNewMessages = snap => {
-      if (snap.val()) {
-        setMessages(Object.values(snap.val()));
-      }
+    const callback = snap => {
+      const message = snap.val();
+      setMessages(messages => [...messages, message]);
     };
 
-    chatRoom.on("value", handleNewMessages);
+    const chatRoom = db.ref("/chatrooms/global/").limitToLast(2);
+
+    chatRoom.on("child_added", callback);
 
     return () => {
-      chatRoom.off("value", handleNewMessages);
+      chatRoom.off("child_added", callback);
     };
   }, []);
 
@@ -48,7 +44,7 @@ const ChatRoom = () => {
   const handleKeyDown = e => {
     const date = new Date();
     if (e.key === "Enter") {
-      chatRoom.push({
+      db.ref("/chatrooms/global/").push({
         sender: nickname,
         avatar,
         message,
