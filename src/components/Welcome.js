@@ -30,10 +30,10 @@ const Welcome = ({
   return (
     <div className="welcome-form">
       <h1>Hey there.</h1>
-      <h3>What's your name?</h3>
+      <h3>What's your doggo name?</h3>
       <TextField
         id="outlined-name"
-        label="Name"
+        label="Doggo Name"
         value={nickname}
         onChange={onNicknameChange}
         margin="normal"
@@ -41,7 +41,7 @@ const Welcome = ({
         required
       />
       <br />
-      <h3>Pick your avatar!</h3>
+      <h3>Pick your doggo!</h3>
       {loading ? (
         <CircularProgress />
       ) : (

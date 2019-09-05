@@ -1,17 +1,15 @@
-import React, { Fragment } from "react";
+import React from "react";
 import MessageItem from "./MessageItem";
+
+import List from "@material-ui/core/List";
 
 const Messages = ({ messages }) => {
   return (
-    <div className="chat">
-      <div className="messages">
-        {messages.map((message, index) => (
-          <Fragment key={index}>
-            <MessageItem message={message}></MessageItem>
-          </Fragment>
-        ))}
-      </div>
-    </div>
+    <List>
+      {messages.map((message, index) => (
+        <MessageItem key={index} message={message}></MessageItem>
+      ))}
+    </List>
   );
 };
 
