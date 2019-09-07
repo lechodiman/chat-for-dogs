@@ -1,6 +1,13 @@
 {
   "name": "chat-for-dogs",
   "version": "0.1.0",
+  "description": "React chat app designed for dogs",
+  "author": "Luis Chodiman",
+  "homepage": "https://github.com/lechodiman/chat-for-dogs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lechodiman/chat-for-dogs"
+  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.4.0",
