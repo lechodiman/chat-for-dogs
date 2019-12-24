@@ -2,7 +2,7 @@
 
 <!--- Provide information about the environment in which this error happened-->
 
-## Steps to Reproduce
+## Steps to reproduce
 
 <!--- Provide a link to a live example, or an unambiguous set of steps to -->
 <!--- reproduce this bug. Include code to reproduce, if relevant -->
