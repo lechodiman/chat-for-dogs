@@ -17,6 +17,10 @@
 
 <!--- Tell us what happens instead -->
 
+## Screenshots
+
+<!--- If applicable -->
+
 ## Description
 
 <!--- Provide a more detailed introduction to the issue itself, and why you consider it to be a bug -->
