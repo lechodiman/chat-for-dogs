@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import useDogs from '../hooks/useDogs';
 
 const Welcome = ({
   nickname,
@@ -11,26 +12,12 @@ const Welcome = ({
   onAvatarChange,
   onClick
 }) => {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchDogs = async () => {
-      const res = await axios.get("https://dog.ceo/api/breeds/image/random/3");
-      return res.data.message;
-    };
-
-    setLoading(true);
-    fetchDogs().then(dogs => {
-      setImages(dogs);
-      setLoading(false);
-    });
-  }, []);
-
+  const { images, loading } = useDogs();
   return (
     <div className="welcome-form">
-      <h1>Hey there.</h1>
-      <h3>What's your doggo name?</h3>
+      <Typography component="h1">Hey there.</Typography>
+
+      <Typography component="h1">What's your doggo name?</Typography>
       <TextField
         id="outlined-name"
         label="Doggo Name"
@@ -52,7 +39,7 @@ const Welcome = ({
               src={image}
               alt="dog"
               onClick={() => onAvatarChange(image)}
-              className={avatar === image ? "dog-img selected" : "dog-img"}
+              className={avatar === image ? 'dog-img selected' : 'dog-img'}
             />
           ))}
         </div>

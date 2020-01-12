@@ -5,6 +5,7 @@ import ChatRoom from "./components/ChatRoom";
 import History from "./components/History";
 import Navbar from "./components/Navbar";
 import BottomNav from "./components/BottomNav";
+
 const App = () => {
   return (
     <Router>

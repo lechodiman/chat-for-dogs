@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import Pagination from "./Pagination";
 import Messages from "./Messages/Messages";
+
 const History = () => {
   const [messages, setMessages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,16 +14,16 @@ const History = () => {
       .child("chatrooms")
       .child("global");
 
-    const handleNewMessages = snap => {
+    const handleMessage = snap => {
       if (snap.val()) {
         setMessages(Object.values(snap.val()));
       }
     };
 
-    chatRoom.limitToLast(100).on("value", handleNewMessages);
+    chatRoom.limitToLast(100).on("value", handleMessage);
 
     return () => {
-      chatRoom.off("value", handleNewMessages);
+      chatRoom.off("value", handleMessage);
     };
   }, []);
 
